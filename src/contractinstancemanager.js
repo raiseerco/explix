@@ -2,7 +2,7 @@ export default class ContractInstanceManager {
   
   constructor (context) {
     this._context = context
-    this._contractInstances = undefined
+    this._contractInstances = []
   }
 
   async _initialize() {
@@ -12,7 +12,7 @@ export default class ContractInstanceManager {
     for (const chainID in contractInstancesData) {
       const instance = new cls(this._context)
       await instance.initializeExisting(chainID, contractInstancesData[chainID])
-      this._contractInstances.append(instance)
+      this._contractInstances.push(instance)
     }    
   }
 
@@ -31,7 +31,7 @@ export default class ContractInstanceManager {
   async joinContractInstance (chainID, metadata) {
     const instance = new cls(this._context)
     await instance.initializeExisting(chainID, metadata)
-    this._contractInstances.append(instance)
+    this._contractInstances.push(instance)
     await this._saveContractInstances()
     return instance
   }
@@ -41,7 +41,7 @@ export default class ContractInstanceManager {
     const cls = this._context.contractInstanceClass
     const instance = new cls(this._context)
     await instance.initializeNew(contractDefinition, parameters)
-    this._contractInstances.append(instance)
+    this._contractInstances.push(instance)
     await this._saveContractInstances()
     return instance
 

@@ -8,7 +8,7 @@ import MessageDispatcher from './messagedispatcher'
 export default class EsplixContext {
   constructor (params) {
     this._ratatosk = params.ratatosk
-    this._contractInstanceClass = params.contractInstanceClass || ContractInstance
+    this.contractInstanceClass = params.contractInstanceClass || ContractInstance
     this._persister = params.persister || (new DummyPersister)
     this._mailbox = params.mailbox
     this._initialized = false
@@ -38,6 +38,6 @@ export default class EsplixContext {
   }
 
   async getData (key) { return await this._persister.getData(key)  }
-  async setData (key, value) { await this._persister.setValue(key, value) }
+  async setData (key, value) { await this._persister.setData(key, value) }
   
 }
