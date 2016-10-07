@@ -3,6 +3,12 @@ import Context from '../src/context'
 import { dummyConfig } from '../src/helper'
 import dummyContract from './dummy.ratc'
 
+async function dummyContext () {
+  let context = new Context(dummyConfig())
+  await context.initialize()
+  context.contractDefinitionManager.registerDefinition(dummyContract)
+  return context
+}
 
 describe("Context", function () {
   it("initialization", async function () {

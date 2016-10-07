@@ -4,13 +4,22 @@ import ContractInstanceManager from './contractinstancemanager'
 import ContractDefinitionManager from './contractdefinitionmanager'
 import InvitationManager from './invitationmanager'
 import MessageDispatcher from './messagedispatcher'
+import PrincipalIdentity from './principalidentity'
+import MCStoreMailbox from './mcsmailbox'
 
 export default class EsplixContext {
   constructor (params) {
     this._ratatosk = params.ratatosk
     this.contractInstanceClass = params.contractInstanceClass || ContractInstance
     this._persister = params.persister || (new DummyPersister)
-    this._mailbox = params.mailbox
+    let mailbox = params.mailbox
+    if (!mailbox) {
+      if (this._ratatosk.consensusEngine.constructor.name === 'MCStoreConnector') {
+	mailbox = new MCStoreMailbox(this, this._ratatosk.consensusEngine)
+      }
+    }
+    if (!mailbox) throw Error("No mailbox was provided")
+    this._mailbox = mailbox    
     this._initialized = false
     this._initializing = false
   }
@@ -19,6 +28,12 @@ export default class EsplixContext {
     if (this._initialized) return
     this._initializing = true
 
+    const principalIdentity = new PrincipalIdentity(this)
+    await principalIdentity.initialize()
+    this.principalIdentity = principalIdentity
+
+    await this._mailbox._initialize()
+    
     const messageDispatcher = new MessageDispatcher(this, this._mailbox)
     await messageDispatcher._initialize()
     this._messageDispatcher = messageDispatcher
