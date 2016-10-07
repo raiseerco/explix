@@ -37,7 +37,9 @@ export default class ContractInstance {
 
   async performAction (action, data) {
     if (!this._initialized) throw Error('not initialized')
-    const msg = this._mcc.makeMessage(action, data, this._context.keys)
+    const keypair = this._context.principalIdentity 
+    const msg = this._mcc.makeMessage(action, data,
+				      [keypair.getPrivateKey()])
     if (!msg) throw Error()
     await this.contractDefinition.beforeAction(action, data)
     await this._mcc.postMessage(msg)

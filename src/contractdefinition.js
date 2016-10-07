@@ -4,7 +4,7 @@ export default class ContractDefinition {
     context._ratatosk.executionEngine.registerContract(
       defobj.contractHash, defobj.contractCode
     )
-    this._annotiations = defobj.annotations || {}
+    this._annotations = defobj.annotations || {}
   }
 
   async beforeAction (action, params) {

@@ -22,6 +22,7 @@ var contract = { 'actionAvailability' : { provideName : function (fields, pubkey
     fields.name = params.aName;
     return true;
 } },
+                 'annotations' : { provideName : { invite : ['aName'] } },
                  'actionParams' : { provideName : { aName : { 'description' : null, 'type' : 'string' } } },
                  'initParams' : { owner : { 'type' : 'pubkey', 'description' : null } },
                  'fieldInfo' : { owner : { 'type' : 'pubkey', 'description' : null }, name : { 'type' : 'string', 'description' : null } },
