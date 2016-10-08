@@ -4,15 +4,15 @@ export default class InvitationManager {
     this._mailbox = mailbox
   }
 
-  async invite (party, chainID) {
-    await this._mailbox.sendMessage({
+  async invite (contractInstance, party) {
+    await this._mailbox.sendMessage(party, {
       type: 'invite',
-      recipient: party,
-      chainID: chainID
+      sender: this._context.principalIdentity.getID(),
+      chainID: contractInstance.getChainID()
     })
   }
 
-  async processInvitEMessage (message) {
+  async processInviteMessage (message) {
     await this._context.contractInstanceManager.joinContractInstance(message.chainID)
   }
   

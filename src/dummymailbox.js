@@ -6,6 +6,8 @@ export default class DummyMailbox {
   async _initialize () {}
   
   async getNextMessage (cookie) { return null }
-  async sendMessage (message) {} 
+  async sendMessage (recipient, message) {
+    console.log("sendMessage", message)
+  } 
 
 }

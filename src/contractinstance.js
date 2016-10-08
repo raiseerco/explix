@@ -40,8 +40,8 @@ export default class ContractInstance {
     const keypair = this._context.principalIdentity 
     const msg = this._mcc.makeMessage(action, data,
 				      [keypair.getPrivateKey()])
-    if (!msg) throw Error()
-    await this.contractDefinition.beforeAction(action, data)
+    if (!msg) throw new Error()
+    await this.contractDefinition.beforeAction(this, action, data)
     await this._mcc.postMessage(msg)
     return
   }

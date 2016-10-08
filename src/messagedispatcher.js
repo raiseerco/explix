@@ -12,7 +12,7 @@ export default class MessageDispatcher {
   async _process (message) {
     switch (message.type) {
       case "invite":
-      await this._context.inivtationManager.processInvitEMessage(message)
+      await this._context.invitationManager.processInviteMessage(message)
       break
     }
   }

@@ -29,6 +29,7 @@ export default class ContractInstanceManager {
   }
 
   async joinContractInstance (chainID, metadata) {
+    const cls = this._context.contractInstanceClass
     const instance = new cls(this._context)
     await instance.initializeExisting(chainID, metadata)
     this._contractInstances.push(instance)

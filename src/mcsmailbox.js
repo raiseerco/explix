@@ -1,10 +1,11 @@
 export default class MCStoreMailbox {
-  constructor (context, connector) {
-    this._context = context
+  constructor (connector) {
     this._connector = connector
   }
 
-  async _initialize () {}
+  async _initialize (context) {
+    this._context = context
+  }
 
   async getNextMessage (lastMessageRef) {
     const chainID = this._context.principalIdentity.getID()
@@ -19,8 +20,7 @@ export default class MCStoreMailbox {
     }
   }
 
-  async sendMessage (msg) {
-    const chainID = this._context.principalIdentity.getID()
-    await this._connector.postMessage(chainID, msg)
+  async sendMessage (recipientID, msg) {
+    await this._connector.postMessage(recipientID, msg)
   }
 }

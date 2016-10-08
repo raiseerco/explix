@@ -15,7 +15,7 @@ export default class EsplixContext {
     let mailbox = params.mailbox
     if (!mailbox) {
       if (this._ratatosk.consensusEngine.constructor.name === 'MCStoreConnector') {
-	mailbox = new MCStoreMailbox(this, this._ratatosk.consensusEngine)
+	mailbox = new MCStoreMailbox(this._ratatosk.consensusEngine)
       }
     }
     if (!mailbox) throw Error("No mailbox was provided")
@@ -32,7 +32,7 @@ export default class EsplixContext {
     await principalIdentity.initialize()
     this.principalIdentity = principalIdentity
 
-    await this._mailbox._initialize()
+    await this._mailbox._initialize(this)
     
     const messageDispatcher = new MessageDispatcher(this, this._mailbox)
     await messageDispatcher._initialize()

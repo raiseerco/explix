@@ -1,13 +1,15 @@
 import Engine from 'ratatoskr/ratlib/exeng'
-import NullConsensus from 'ratatoskr/ratlib/consensus/null'
-import DummyMailbox from './dummymailbox'
+import MemoryConsensus from 'ratatoskr/ratlib/consensus/memory'
+import MCStoreMailbox from './mcsmailbox'
 
 export function dummyConfig (params) {
+  if (params === undefined) params = {}
+  let consensusEngine = params.consensusEngine || new MemoryConsensus 
   return {
     ratatosk: {
-      consensusEngine: new NullConsensus,
+      consensusEngine: consensusEngine,
       executionEngine: new Engine
     },
-    mailbox: new DummyMailbox
+    mailbox: new MCStoreMailbox(consensusEngine)
   }
 }
