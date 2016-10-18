@@ -1,3 +1,4 @@
+'use strict'
 import MessageChainController from 'ratatoskr/ratlib/controller'
 
 export default class ContractInstance {
@@ -28,6 +29,19 @@ export default class ContractInstance {
     return
   }
 
+  getFields(){
+    this._mcc.messageChain.getContractState().getFields();
+  } 
+  
+  getApplicableActions( pubkeys ){
+    pubkeys = pubkeys || this._context.principalIdentity.getPublicKey();
+    this._mcc.messageChain.getContractState().getApplicableActions( pubkeys );
+  } 
+
+  getActionParams(){
+     this._mcc.messageChain.getContractState().getActionParams();
+  }
+
   getChainID () {
     if (!this._initialized) throw Error('not initialized')
     return this._mcc.chainID
@@ -44,10 +58,6 @@ export default class ContractInstance {
     await this.contractDefinition.beforeAction(this, action, data)
     await this._mcc.postMessage(msg)
     return
-  }
-
-  
-
-  
+  } 
   
 }

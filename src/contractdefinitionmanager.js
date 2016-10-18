@@ -1,3 +1,4 @@
+'use strict'
 import ContractDefinition from './contractdefinition'
 
 export default class ContractDefinitionManager {

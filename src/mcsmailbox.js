@@ -1,3 +1,4 @@
+'use strict'
 export default class MCStoreMailbox {
   constructor (connector) {
     this._connector = connector

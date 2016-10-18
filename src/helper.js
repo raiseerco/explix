@@ -1,3 +1,4 @@
+'use strict'
 import Engine from 'ratatoskr/ratlib/exeng'
 import MemoryConsensus from 'ratatoskr/ratlib/consensus/memory'
 import MCStoreMailbox from './mcsmailbox'

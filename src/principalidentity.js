@@ -1,3 +1,4 @@
+'use strict'
 export default class PrincipalIdentity {
   constructor (context) {
     this._context = context

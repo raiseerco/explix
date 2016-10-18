@@ -1,3 +1,4 @@
+'use strict'
 import ContractInstance from './contractinstance'
 import DummyPersister from './dummypersister'
 import ContractInstanceManager from './contractinstancemanager'
@@ -8,51 +9,55 @@ import PrincipalIdentity from './principalidentity'
 import MCStoreMailbox from './mcsmailbox'
 
 export default class EsplixContext {
-  constructor (params) {
-    this._ratatosk = params.ratatosk
-    this.contractInstanceClass = params.contractInstanceClass || ContractInstance
-    this._persister = params.persister || (new DummyPersister)
-    let mailbox = params.mailbox
-    if (!mailbox) {
-      if (this._ratatosk.consensusEngine.constructor.name === 'MCStoreConnector') {
-	mailbox = new MCStoreMailbox(this._ratatosk.consensusEngine)
-      }
+    constructor(params) {
+        this._ratatosk = params.ratatosk
+        this.contractInstanceClass = params.contractInstanceClass || ContractInstance
+        this._persister = params.persister || (new DummyPersister)
+        let mailbox = params.mailbox
+        if (!mailbox) {
+            if (this._ratatosk.consensusEngine.constructor.name === 'MCStoreConnector') {
+                mailbox = new MCStoreMailbox(this._ratatosk.consensusEngine)
+            }
+        }
+        if (!mailbox) throw Error("No mailbox was provided")
+        this._mailbox = mailbox
+        this._initialized = false
+        this._initializing = false
     }
-    if (!mailbox) throw Error("No mailbox was provided")
-    this._mailbox = mailbox    
-    this._initialized = false
-    this._initializing = false
-  }
 
-  async initialize () {
-    if (this._initialized) return
-    this._initializing = true
+    async initialize() {
+        if (this._initialized) return
+        this._initializing = true
 
-    const principalIdentity = new PrincipalIdentity(this)
-    await principalIdentity.initialize()
-    this.principalIdentity = principalIdentity
+        const principalIdentity = new PrincipalIdentity(this)
+        await principalIdentity.initialize()
+        this.principalIdentity = principalIdentity
 
-    await this._mailbox._initialize(this)
-    
-    const messageDispatcher = new MessageDispatcher(this, this._mailbox)
-    await messageDispatcher._initialize()
-    this._messageDispatcher = messageDispatcher
-    
-    this.invitationManager = new InvitationManager(this, this._mailbox)
-    
-    const contractDefinitionManager = new ContractDefinitionManager(this)
-    await contractDefinitionManager._initialize()
-    this.contractDefinitionManager = contractDefinitionManager
+        await this._mailbox._initialize(this)
 
-    const contractInstanceManager = new ContractInstanceManager(this)
-    await contractInstanceManager._initialize()
-    this.contractInstanceManager = contractInstanceManager
+        const messageDispatcher = new MessageDispatcher(this, this._mailbox)
+        await messageDispatcher._initialize()
+        this._messageDispatcher = messageDispatcher
 
-    this._initialized = true
-    this._initializing = false
-  }
+        this.invitationManager = new InvitationManager(this, this._mailbox)
 
-  async getData (key) { return await this._persister.getData(key)  }
-  async setData (key, value) { await this._persister.setData(key, value) }
-  
+        const contractDefinitionManager = new ContractDefinitionManager(this)
+        await contractDefinitionManager._initialize()
+        this.contractDefinitionManager = contractDefinitionManager
+
+        const contractInstanceManager = new ContractInstanceManager(this)
+        await contractInstanceManager._initialize()
+        this.contractInstanceManager = contractInstanceManager
+
+        this._initialized = true
+        this._initializing = false
+    }
+
+    async getData(key) {
+       return await this._persister.getData(key)
+    }
+    async setData(key, value) {
+        await this._persister.setData(key, value)
+    }
+
 }

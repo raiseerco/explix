@@ -1,3 +1,4 @@
+'use strict'
 export default class MessageDispatcher {
   constructor (context, mailbox) {
     this._context = context
