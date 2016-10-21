@@ -9,19 +9,22 @@
     "compile:watch": "mkdir -p lib && babel src -d lib -w",
     "lint": "standard",
     "test": "npm run clean && npm run compile && npm run test:regtest",
-    "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel/register --reporter spec"
+    "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel/register --reporter spec",
+    "babel-node": "babel-node --presets='latest'"
   },
   "author": "Alex Mizrahi <alex.mizrahi@gmail.com>",
   "dependencies": {
+    "app-module-path": "^2.1.0",
     "babel": "^5.8.23",
     "babel-runtime": "^5.8.25",
+    "express": "^4.14.0",
     "lodash": ""
   },
   "license": "UNLICENSED",
   "devDependencies": {
     "babel-eslint": "^4.1.3",
+    "babel-preset-es2016": "^6.16.0",
     "chai": "^3.3.0",
     "mocha": "^2.3.3"
   }
-
 }

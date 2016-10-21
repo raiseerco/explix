@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import Context from '../src/context'
-import { dummyConfig } from '../src/helper'
+import Context from '../lib/context'
+import { dummyConfig } from '../lib/helper'
 import dummyContract from './dummy.ratc'
 
 async function dummyContext(configParams) {

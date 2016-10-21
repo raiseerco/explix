@@ -1,0 +1,3 @@
+
+to run project with nodemon
+nodemon --exec npm run babel-node -- index.js
