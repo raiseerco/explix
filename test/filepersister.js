@@ -1,7 +1,7 @@
 'use strict'
 //check filepersister module
 
-const FilePersister = require('../src/filepersister.js');
+import FilePersister = from '../src/filepersister.js';
 
 const FilePersisterInstance = new FilePersister();
 
