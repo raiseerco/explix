@@ -151,6 +151,14 @@ const bodyParser = require('body-parser');
         jayson.server(contracts).middleware() 
     )
 
+    app.use(function(err, req, res, next) {
+        if (!err || err.status == 404) return next(); // you also need this line
+        console.error( err.stack );
+        console.log(err);
+        res.status(500).send(err);
+    });
+
+
     const server = app.listen(4000, function() {
         console.log('process.env.NODE_ENV = ' + process.env.NODE_ENV);
         console.log('Example app listening at http://%s:%s', server.address().address, server.address().port);
