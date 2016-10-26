@@ -147,6 +147,9 @@ const bodyParser = require('body-parser');
         bodyParser.json(),
         bodyParser.urlencoded({
             extended: true
+        }),
+        jayson.server(contracts).middleware() 
+    )
 
     const server = app.listen(4000, function() {
         console.log('process.env.NODE_ENV = ' + process.env.NODE_ENV);
