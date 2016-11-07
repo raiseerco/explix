@@ -81,16 +81,19 @@ const api = express.Router()
     {   "jsonrpc": "2.0", 
         "id":"1",
         "method":"getActionParams", 
-        "params": {"id": {{contract id}}} }
+        "params": {"id": {{contract id}}}, "actionName": 'actionName'  }
     */
     async function getActionParams(args, callback) {
+        if(!args.id || args.actionParams ){
+             callback({ code: 404, message: 'invalid request' }) // will return the error object as given) // will return the error object as given     
+        }
         const contract = await context.contractInstanceManager.getInstanceByChainID(args.id);
 
         if (!contract) {
             var error = { code: 404, message: 'Cannot find chain id ' + args.id }
             callback(error) // will return the error object as given
         } else {
-            const result = contract.getActionParams()
+            const result = contract.getActionParams(args.actionName)
             return callback(null, result);
         }
     }
