@@ -4,9 +4,9 @@
   "description": "Esplix smart contract layer",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf lib",
-    "compile": "mkdir -p lib && babel src -d lib",
-    "compile:watch": "mkdir -p lib && babel src -d lib -w",
+    "clean": "rm -rf lib.es5",
+    "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
+    "compile:watch": "mkdir -p lib.es5 && babel lib -d lib.es5 -w",
     "lint": "standard",
     "test": "npm run clean && npm run compile && npm run test:regtest",
     "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel/register --reporter spec",
