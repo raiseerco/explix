@@ -27,6 +27,26 @@ debugging applications):
  * messageDispatcher: Process received messages
  * invitationManager: Invite other users to contracts (by sending them messages)
 
+### PrincipalIdentity
+
+PrincipalIdentity represents a keypair of a user associated with the context. The object is created and initialized by the context.
+
+Identity is originally blank and needs to be set up in one of ways:
+
+ * `importIdentity(data)`: imports existing keypair, represented with a JSON object `{pub: '...\, wif: '...'}`. (Specific format depends on Ratatosk engine being used)
+ * `generateIdentity()`: generates a new random keypair
+
+Once identity is set up, it will be perisisted by the context.
+
+Public API:
+
+ * `isSetUp()`
+ * `getPublicKey()`: returns a string
+ * `getPrivateKey()`: returns a string (e.g. WIF)
+ * `getID()`: usually same as public key
+
+
+
 ### ContractDefinitionManager
 
 ContractDefinitionManager is used to register and enumerate contract definitions. It is
