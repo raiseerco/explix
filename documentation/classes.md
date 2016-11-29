@@ -1,3 +1,7 @@
+# Esplix documentation
+
+## Classes
+
 ### EsplixContext
 
 EsplixContext coordinates objects required for Esplix client operations, provides means
@@ -100,6 +104,8 @@ Public API:
  * `getApplicableActions(pubkeys)`: returns actions which other users might take
  * `getActionParams(actionName)`: returns a list of parameters which are necessary to perform an action; in a form of a [parameter descriptor object](#parameter-descriptor-object)
  * `getFieldInfo()`: TODO: returns description of contract's fields, in in a form of a [parameter descriptor object](#parameter-descriptor-object)
+
+## Data formats
 
 ### Parameter descriptor object
 
