@@ -1,4 +1,5 @@
 {
-  "presets": ["latest"],
-  "sourceMaps": "inline"
+    "plugins": [ "transform-runtime" ],
+    "presets": [ "latest" ],
+    "sourceMaps": "inline"
 }
