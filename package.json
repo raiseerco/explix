@@ -2,32 +2,46 @@
   "name": "esplix",
   "version": "0.0.1",
   "description": "Esplix smart contract layer",
-  "main": "index.js",
+  "main": "lib.es5/index.js",
   "scripts": {
     "clean": "rm -rf lib.es5",
     "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
     "compile:watch": "mkdir -p lib.es5 && babel lib -d lib.es5 -w",
-    "lint": "standard",
     "test": "npm run clean && npm run compile && npm run test:regtest",
-    "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel/register --reporter spec",
-    "babel-node": "babel-node --presets='latest'"
+    "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel-core/register --reporter spec",
+    "babel-node": "babel-node --presets='latest'",
+    "build-sdk": "npm run compile && webpack --config webpack.config.js && npm pack esplix-sdk"
   },
   "author": "Alex Mizrahi <alex.mizrahi@gmail.com>",
   "dependencies": {
     "app-module-path": "^2.1.0",
+    "babel-runtime": "^6.23.0",
     "body-parser": "^1.15.2",
+    "browser-request": "^0.3.3",
     "express": "^4.14.0",
     "jayson": "^2.0.2",
     "lodash": "",
-    "babel-runtime": "^6.18.0"
+    "postchain-client": "git+ssh://git@bitbucket.org/chromawallet/postchain-client.git",
+    "transform-runtime": "0.0.0",
+    "ratatosk2": "../ratatosk2"
   },
   "license": "UNLICENSED",
+  "bundledDependencies": [
+    "postchain-client",
+    "ratatosk2"
+  ],
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^4.1.3",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2016": "^6.16.0",
     "babel-preset-latest": "^6.16.0",
     "chai": "^3.3.0",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "webpack": "^2.5.0"
+  },
+  "browser": {
+    "request": "browser-request"
   }
 }

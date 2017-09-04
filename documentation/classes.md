@@ -37,7 +37,8 @@ PrincipalIdentity represents a keypair of a user associated with the context. Th
 
 Identity is originally blank and needs to be set up in one of ways:
 
- * `importIdentity(data)`: imports existing keypair, represented with a JSON object `{pub: '...\, wif: '...'}`. (Specific format depends on Ratatosk engine being used)
+ * `importIdentity(data)`: imports existing keypair, represented with a JSON object `{pubKey: '...', privKey: '...'}`.
+    (Specific format depends on Ratatosk engine being used)
  * `generateIdentity()`: generates a new random keypair
 
 Once identity is set up, it will be perisisted by the context.
@@ -58,11 +59,10 @@ created & initialized by a context (shouldn't be directly instantiated by an app
 
 Methods:
 
- * `registerDefinition(definitionObject)`: registers a definition previously prepared using Ratatosk compiler as a JS source file. Definition object is usually loaded via `require()`.
+ * `registerDefinition(data)`: registers a definition previously prepared using Ratatosk compiler. Expects data as Buffer.
+ * `registerDefinitionFromURL(url)`
  * `getByContractHash(hash)`: retrieve a contract definition by a contract hash (which is passed in hex encoding). Returns `undefined` if no such contract was previously registered
  * `getAllDefinitions()`: returns an array of all registered definitions
-
-(TODO: how do we load a definition fetched by URL?)
 
 ### ContractDefinition
 
@@ -72,12 +72,12 @@ Public API:
 
  * `contractHash` field: serves as an identifier of a contract code
  * `getInitParams()`: returns a [parameter descriptor object](#parameter-descriptor-object) with parameters which are neccessary for contract instance initialization
- * `name` field: user-readable name, might be `undefine`
+ * `name` field: user-readable name, might be `undefined`
 
 Internal API:
 
  * `async beforeAction (contractInstance, action, params)`: used by ContractInstance to trigger
-  automatica actions, such as invitations
+  automatical actions, such as invitations
 
 ### ContractInstanceManager
 
@@ -127,9 +127,8 @@ A description is optional (might be null).
 
 Possible types are:
 
- * string
- * pubkey
- * enum (currently same as string)
- * array
- * integer
+ * STRING
+ * PUBKEY
+ * ARRAY
+ * INTEGER
 

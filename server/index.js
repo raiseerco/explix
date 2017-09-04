@@ -1,4 +1,3 @@
-'use strict'
 import express from 'express';
 import path from 'path';
 import jayson from 'jayson';
@@ -14,7 +13,6 @@ const api = express.Router()
 
 
 ;(async function() {
-    /*Initialize context here*/
     async function dummyContext(configParams) {
         const context = new Context(dummyConfig(configParams))
         await context.initialize()
