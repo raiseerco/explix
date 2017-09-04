@@ -5,4 +5,4 @@ import FilePersister from '../lib/filepersister.js';
 
 const FilePersisterInstance = new FilePersister();
 
-FilePersisterInstance.setData('testFile.txt', {test: 'testJsonFileStorage1' })
+//FilePersisterInstance.setData('testFile.txt', {test: 'testJsonFileStorage1' })
