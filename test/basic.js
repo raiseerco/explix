@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import Context from '../lib/context'
 import { dummyConfig } from '../lib/helper'
+import { DummyMailbox} from "../lib/dummymailbox"
 import * as fs from "mz/fs";
 
 async function dummyContext(configParams) {
@@ -40,22 +41,29 @@ describe("Context", function() {
         await contractInstance.performAction("OFFER", { "PROPERTY-ID": "Frobla" })
     });
 
-/*    it("invitation", async function() {
-        const context1 = await dummyContext()
-        const context2 = await dummyContext({ consensusEngine: context1._ratatosk.consensusEngine })
-        await context1.principalIdentity.generateIdentity()
-        await context2.principalIdentity.generateIdentity()
-        const contractInstance = await context1.contractInstanceManager.createContractInstance(
-            context1.contractDefinitionManager.getByContractHash(dummyContractHash), { owner: context1.principalIdentity.getPublicKey() }
-        )
-        await contractInstance.performAction("provideName", { aName: context2.principalIdentity.getPublicKey() })
-        await context1._messageDispatcher.update()
-        await context2._messageDispatcher.update()
+    it("invitation", async function() {
+        const { context, contractDefinition } = await dummyContext();
+        // create the second context in such a way that it shares message store (consensusEngine) and mailbox manager
+        const context2 = (await dummyContext({
+            consensusEngine: context._ratatosk.consensusEngine,
+            mailbox: new DummyMailbox(context._mailbox.manager)
+        })).context;
+        await context.principalIdentity.generateIdentity();
+        await context2.principalIdentity.generateIdentity();
+        const contractInstance = await context.contractInstanceManager.createContractInstance(
+            contractDefinition, { SELLER: context.principalIdentity.getPublicKey() }
+        );
+        await contractInstance.performAction("OFFER", { "PROPERTY-ID": "Frobla" });
+        await contractInstance.performAction("INVITE-BROKER",
+            { "BROKER-PK": context2.principalIdentity.getPublicKey().toString('hex') });
 
-        const context2_contractInstances = await context2.contractInstanceManager.getContractInstances()
+        await context.update();
+        await context2.update();
+
+        const context2_contractInstances = await context2.contractInstanceManager.getContractInstances();
 
         expect(context2_contractInstances.length).to.equal(1)
-    })*/
+    })
 
 
-})
+});
