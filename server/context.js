@@ -1,7 +1,8 @@
 const esplix = require('../lib.es5');
 const fs = require('mz/fs');
+const path = require("path");
 
-async function initializeContext(context, config) {
+async function initializeContext(dataDirectory, context, config) {
     await context.initialize();
     if (!context.principalIdentity.isSetUp()) {
         if (config.keypair) {
@@ -11,24 +12,29 @@ async function initializeContext(context, config) {
             await context.principalIdentity.generateIdentity();
         }
     }
-    for (const name of await fs.readdir("./contracts")) {
-        context.contractDefinitionManager.registerContractDefinition(
-            await fs.readFile(name)
+    const directory = dataDirectory + "/contracts";
+    for (const name of await fs.readdir(directory)) {
+        const def = context.contractDefinitionManager.registerDefinition(
+            await fs.readFile(path.join(directory, name)), name
         );
+        console.log("Loaded definition ", def.name, def.contractHash);
     }
     return context
 }
 
-exports.createContext = function createContext(config) {
+exports.createAndInitializeContext = function createAndInitializeContext(dataDirectory, config) {
+    let context;
     if (config.mode === "simulated")
-        return createSimulatedContext(config);
+        context = createSimulatedContext(config);
     else if (config.mode === "postchain")
-        return createPostchainContext(config);
-    else throw Error(`Mode ${config.mode} is not supported`)
+        context = createPostchainContext(config);
+    else throw Error(`Mode ${config.mode} is not supported`);
+
+    return initializeContext(dataDirectory, context, config);
 };
 
 function createSimulatedContext(config) {
-    return initializeContext(new esplix.EsplixContext(esplix.dummyConfig()), config);
+    return new esplix.EsplixContext(esplix.dummyConfig());
 }
 
 function createPostchainContext(config) {
@@ -38,6 +44,6 @@ function createPostchainContext(config) {
     );
     // TODO: create a good persister. Dummy is used by default.
     // config.persister = new FilePersister(...);
-    return initializeContext(new esplix.EsplixContext(config), config);
+    return new esplix.EsplixContext(config);
 
 }
