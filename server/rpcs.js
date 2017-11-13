@@ -17,6 +17,43 @@ function getContractInstanceIDs(context, args) {
     }
 }
 
+function getFields(context, args) {
+  if (args.length !== 1) throw new RPCError(-32602, "getFields requires 1 parameter");
+  const chainID = args[0];
+    try {
+        const instance = context.contractInstanceManager.getInstanceByChainID(chainID);
+        if (!instance) throw new RPCError(1, "Contract instance not found");
+        return Promise.resolve(instance.getFields());
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+function getApplicableActions(context, args) {
+  if (args.length !== 1) throw new RPCError(-32602, "getApplicableActions requires 1 parameter");
+  const chainID = args[0];
+    try {
+        const instance = context.contractInstanceManager.getInstanceByChainID(chainID);
+        if (!instance) throw new RPCError(1, "Contract instance not found");
+        return Promise.resolve(instance.getApplicableActions());
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+function getActionParams(context, args) {
+  if (args.length !== 2) throw new RPCError(-32602, "getActionParams requires 2 parameters");
+  const chainID = args[0];
+  const actionName = args[1];
+    try {
+        const instance = context.contractInstanceManager.getInstanceByChainID(chainID);
+        if (!instance) throw new RPCError(1, "Contract instance not found");
+        return Promise.resolve(instance.getActionParams(actionName));
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
 async function performAction(context, args) {
     if (args.length !== 3) throw new RPCError(-32602, "performAction requires 3 parameters");
     const chainID = args[0];
@@ -48,6 +85,8 @@ async function createContractInstance(context, args) {
 
 module.exports = {
     getContractInstanceIDs,
+    getFields,
+    getApplicableActions,
     createContractInstance,
     performAction
 };

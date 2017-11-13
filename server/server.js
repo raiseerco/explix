@@ -26,7 +26,7 @@ async function createContexts() {
         dataDirectory = process.argv[2];
         console.log("Using data directory", dataDirectory);
     } else {
-        dataDirectory = "testdata";
+        dataDirectory = "server/testdata";
         console.log("Data directory name not provided using, test data (testdata)");
     }
     const contextsDir = dataDirectory + "/contexts";

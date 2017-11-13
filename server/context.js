@@ -38,12 +38,12 @@ function createSimulatedContext(config) {
 }
 
 function createPostchainContext(config) {
-    const config = esplix.postchainConfig(
+    const postchain_config = esplix.postchainConfig(
         config.postchainURL, // e.g. "http://main-message-store.dv2.bitcontracts.org"
         config.messagingURL  // e.g. "http://messaging.dv.bitcontracts.org"
     );
     // TODO: create a good persister. Dummy is used by default.
     // config.persister = new FilePersister(...);
-    return new esplix.EsplixContext(config);
+    return new esplix.EsplixContext(postchain_config);
 
 }
