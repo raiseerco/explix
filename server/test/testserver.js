@@ -20,6 +20,13 @@ function request(name, args) {
     });
 }
 
+async function createContractInstance() {
+  return request("createContractInstance",
+      ["a7d3410a253e8754f8d9676e74c21af82ccd4e7866441417007d721638b4533c", {
+          SELLER: "0000"
+      }]);
+}
+
 describe("Esplix Server tests", function () {
     this.timeout(50000);
 
@@ -33,11 +40,14 @@ describe("Esplix Server tests", function () {
     });
 
     it("Create instance", async () => {
-        const instanceID = await request("createContractInstance",
-            ["a7d3410a253e8754f8d9676e74c21af82ccd4e7866441417007d721638b4533c", {
-                SELLER: "0000"
-            }]);
+        const instanceID = await createContractInstance();
         expect(instanceID).to.be.a('string').with.lengthOf(64);
+    })
+
+    it("gets field info", async () => {
+        const instanceID = await createContractInstance();
+        const fieldInfo = await request("getFieldInfo", [instanceID]);
+        expect(fieldInfo).to.not.be.empty;
     })
 
 });
