@@ -10,7 +10,8 @@
     "test": "npm run clean && npm run compile && npm run test:regtest",
     "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel-core/register --reporter spec",
     "babel-node": "babel-node --presets='latest'",
-    "build-sdk": "npm run compile && webpack --config webpack.config.js && npm pack ./esplix-sdk"
+    "build-sdk": "npm run compile && webpack --config webpack.config.js && npm pack ./esplix-sdk",
+    "test-server": "mocha server/testdata --compilers js:babel-core/register --reporter spec server/test/testserver.js"
   },
   "author": "Alex Mizrahi <alex.mizrahi@gmail.com>",
   "dependencies": {

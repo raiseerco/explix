@@ -9,8 +9,8 @@ to run RPC server
     $ npm run babel-node -- ./server/index.js
 
 Get a contract ids:
-    $ ./node_modules/jayson/bin/jayson.js -u http://127.0.0.1:4000/contracts -m getContractIds
+    $ ./node_modules/jayson/bin/jayson.js -u http://127.0.0.1:5535/alice/jsonrpc -m getContractInstanceIDs
 
-Get fields of a contract (change id to one of the results you get back from teh above call):
+Get fields of a contract (change id to one of the results you get back from the above call):
 
-    $ ./node_modules/jayson/bin/jayson.js  -u http://127.0.0.1:4000/contracts -m getFields -p '{"id": "718ab9effd0e8b3364bb19f3ad1e9d2023199f1049f4f4a12384192b3eefca14"}'
+    $ ./node_modules/jayson/bin/jayson.js  -u http://127.0.0.1:5535/alice/jsonrpc -m getFields -p '["5493c160ad85429be6c599521db940f3635d83fde7a40d2b029bfc3179a57b91"]'

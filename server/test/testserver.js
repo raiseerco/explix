@@ -1,10 +1,10 @@
 // Note: test does not automatically launch the server, so you should
 // launch Esplix Server with testdata
-
+const server = require('../server');
 const jayson = require("jayson");
 const expect = require("chai").expect;
 
-const client =  jayson.client.http("http://localhost:5535/alice/jsonrpc");
+var client;
 
 function request(name, args) {
     return new Promise( (resolve, reject) => {
@@ -22,6 +22,11 @@ function request(name, args) {
 
 describe("Esplix Server tests", function () {
     this.timeout(50000);
+
+    before(async () => {
+      const contexts = await server.createContexts();
+      client = jayson.client(server.initJaysonServer(contexts[0]));
+    });
 
     it("No instances", async () => {
         expect(await request("getContractInstanceIDs", [])).to.be.an('array').with.lengthOf(0);

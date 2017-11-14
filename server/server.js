@@ -19,14 +19,14 @@ app.use(function(err, req, res, next) {
 });
 
 
-async function createContexts() {
+exports.createContexts = async function createContexts() {
     console.log("Creating contexts...");
     let dataDirectory;
     if (process.argv.length > 2) {
         dataDirectory = process.argv[2];
         console.log("Using data directory", dataDirectory);
     } else {
-        dataDirectory = "testdata";
+        dataDirectory = "server/testdata";
         console.log("Data directory name not provided using, test data (testdata)");
     }
     const contextsDir = dataDirectory + "/contexts";
@@ -62,13 +62,13 @@ function bindRPCs(context) {
     return object;
 }
 
-createContexts().then( (contexts) => {
+exports.createContexts().then( (contexts) => {
     // create JSON-RPC servers for each context:
     for (const context of contexts) {
         app.post(`/${context._name}/jsonrpc`,
             bodyParser.json(),
             bodyParser.urlencoded({  extended: true   }),
-            jayson.server(bindRPCs(context)).middleware()
+            exports.initJaysonServer(context).middleware()
         )
     }
     const server = app.listen(5535, function() {
@@ -80,3 +80,7 @@ createContexts().then( (contexts) => {
 }).catch( err => {
     console.error(err);
 });
+
+exports.initJaysonServer = function initJaysonServer(context){
+  return jayson.server(bindRPCs(context));
+}
