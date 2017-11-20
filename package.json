@@ -22,7 +22,7 @@
     "express": "^4.14.0",
     "jayson": "^2.0.2",
     "lodash": "",
-    "postchain-client": "git+ssh://git@bitbucket.org/chromawallet/postchain-client.git",
+    "postchain-client": "git+ssh://git@bitbucket.org/chromawallet/postchain-client.git#v0.1",
     "transform-runtime": "0.0.0",
     "ratatosk2": "../ratatosk2"
   },
