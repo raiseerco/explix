@@ -12,6 +12,7 @@
     "babel-node": "babel-node --presets='latest'",
     "build-browser-sdk": "npm run compile && webpack --config webpack-browser.config.js && npm pack ./esplix-browser-sdk",
     "build-node-sdk": "npm run compile && webpack --config webpack-node.config.js && npm pack ./esplix-node-sdk",
+    "build-server-sdk": "npm run compile && webpack --config webpack-server.config.js",
     "test-server": "mocha server/testdata --compilers js:babel-core/register --reporter spec server/test/testserver.js"
   },
   "author": "Alex Mizrahi <alex.mizrahi@gmail.com>",
