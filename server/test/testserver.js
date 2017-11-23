@@ -10,7 +10,7 @@ function request(name, args) {
     return new Promise( (resolve, reject) => {
         try {
             client.request(name, args, (error, response) => {
-                console.log(response);
+                // console.log(response);
                 if (error) reject(error);
                 else resolve(response.result);
             });
