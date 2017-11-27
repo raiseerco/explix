@@ -1,44 +1,71 @@
 Esplix Server API
 ====================
 
+Esplix Server API methods are called through JSON-RPC.
+When using an external JSON RPC clients, the context of a contract is referenced using the URL of the server.
+
+Example: ``http://localhost:5535/alice/jsonrpc`` is the server's JSON-RPC URL while ``alice`` is the name of the context.
+
 Functions
 -----------
 
-getContractInstanceIDs(context, args)
+getContractInstanceIDs()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Returns all instance IDs from a specific context.
 
 args: none.
 
-getFields(context, args)
+getFields()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Returns all fields from a contract.
 
-args: chainID.
+args:
 
-getApplicableActions(context, args)
+* ``chainID``: contract instance ID
+
+getFieldInfo()
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Returns information on the requested field of a contract.
+
+args:
+
+* ``chainID``: contract instance ID
+
+getApplicableActions()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Returns all applicable actions from a contract.
 
-args: chainID.
+args:
 
-getActionParams(context, args)
+* ``chainID``: contract instance ID
+
+getActionParams()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Returns all params of a specific action.
 
-args: chainID, actionName.
+args:
 
-performAction(context, args)
+* ``chainID``: contract instance ID
+* ``actionName``: name of the requested action
+
+performAction()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Performs an action in a contract.
 
-args: chainID, actionName, actionArgs.
+args:
 
-createContractInstance(context, args)
+* ``chainID``: contract instance ID
+* ``actionName``: name of the requested action
+* ``actionArgs``: arguments to be passed to the action
+
+createContractInstance()
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Creates a new contract instance.
 
-args: contractHash, params.
+args:
+
+* ``contractHash``: the hash of the contract to make an instance of
+* ``params``: contract initialization params
 
 Sample Code
 -----------
