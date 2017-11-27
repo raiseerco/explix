@@ -1,0 +1,12 @@
+image: node:8.9
+pipelines:
+  default:
+    - step:
+        script:
+          - bash install-ratatosk.sh
+          - npm install
+          - npm run test
+          - npm run test-server
+          - npm run build-node-sdk
+          - npm run build-browser-sdk
+          - npm run build-server-sdk

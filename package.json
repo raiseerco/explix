@@ -46,7 +46,8 @@
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "mz": "^2.7.0",
-    "webpack": "^2.5.0"
+    "webpack": "^2.5.0",
+    "babel-core": "^6.18.0"
   },
   "browser": {
     "request": "browser-request"
