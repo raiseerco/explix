@@ -1,6 +1,8 @@
 Esplix Server
 ====================
 
+Esplix Server acts as an agent for a particular user or a set of users, it will retrieve messages corresponding to contracts they are interested in, compute current state, manage encryption/decryption and signing to allow users to interact with contracts. 
+
 Install & Lanuch
 ^^^^^^^^^^^^^^^^
 
