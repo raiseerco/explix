@@ -1,10 +1,10 @@
 // Note: test does not automatically launch the server, so you should
 // launch Esplix Server with testdata
-const server = require('../server');
+const server = require('../backend');
 const jayson = require("jayson");
 const expect = require("chai").expect;
 
-var client;
+let client;
 
 function request(name, args) {
     return new Promise( (resolve, reject) => {
@@ -31,7 +31,7 @@ describe("Esplix Server tests", function () {
     this.timeout(50000);
 
     before(async () => {
-      const contexts = await server.createContexts();
+      const contexts = await server.createContexts({});
       client = jayson.client(server.initJaysonServer(contexts[0]));
     });
 
@@ -42,7 +42,7 @@ describe("Esplix Server tests", function () {
     it("Create instance", async () => {
         const instanceID = await createContractInstance();
         expect(instanceID).to.be.a('string').with.lengthOf(64);
-    })
+    });
 
     it("gets field info", async () => {
         const instanceID = await createContractInstance();
