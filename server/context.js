@@ -19,6 +19,10 @@ async function initializeContext(dataDirectory, context, config) {
         );
         console.log("Loaded definition ", def.name, def.contractHash);
     }
+
+    await context.update();
+    setInterval(() => { context.update() }, 1000);
+
     return context
 }
 
