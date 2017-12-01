@@ -1,8 +1,26 @@
 const ArgumentParser = require('argparse').ArgumentParser;
+const crypto = require('crypto');
+const secp256k1 = require('secp256k1');
+const backend = require('./backend');
+
+const bodyParser = require("body-parser");
+const express = require('express');
+
+
+const app = express();
+const api = express.Router();
+
+app.use(function(err, req, res, next) {
+  if(!err || err.status === 404) return next(); //  TODO: Apparently is required, check if it will be at the end of the implementation
+  console.error(err.stack);
+  console.error(err);
+  res.status(500).send(err);
+});
+
 const parser = new ArgumentParser({
     version: '1.0',
     addHelp: true,
-    description: 'examples: node esplix-server-sdk.js --port=5535 --datadir=Datadir'
+    description: 'examples: node esplix-server.js --port=5535 --datadir=Datadir'
 });
 parser.addArgument(
     [ '-p', '--port' ],
@@ -34,9 +52,11 @@ function keygen(){
     } while (!secp256k1.privateKeyVerify(privKey));
     const pubKey = secp256k1.publicKeyCreate(privKey);
 
-    console.log();
-    console.log('Private key : ' + privKey.toString('hex'));
-    console.log('Public key :  ' + pubKey.toString('hex'));
+    console.log('"keypair":');
+    console.log(JSON.stringify({
+      privKey: privKey.toString('hex'),
+      pubKey: pubKey.toString('hex')
+    }));
 }
 
 //---- Process start
@@ -46,13 +66,13 @@ if (args.keygen){
 }
 
 
-exports.createContexts(args).then( (contexts) => {
+backend.createContexts(args).then( (contexts) => {
     // create JSON-RPC servers for each context:
     for (const context of contexts) {
         app.post(`/${context._name}/jsonrpc`,
             bodyParser.json(),
             bodyParser.urlencoded({  extended: true   }),
-            exports.initJaysonServer(context).middleware()
+            backend.initJaysonServer(context).middleware()
         )
     }
     let port = (!args.port ? 5535 : args.port);

@@ -9,7 +9,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'esplix-server-sdk.js',
+    filename: 'esplix-server.js',
     libraryTarget: "umd",
     library: "esplix",
     path: path.resolve(__dirname, 'esplix-server-sdk')

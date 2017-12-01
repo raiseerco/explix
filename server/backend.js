@@ -1,23 +1,9 @@
-const express = require('express');
 const fs = require("mz/fs");
 const path = require("path");
 const jayson = require("jayson");
-const bodyParser = require("body-parser");
 console.log("Loading Esplix engine...");
 const createAndInitializeContext = require('./context').createAndInitializeContext;
 const rpcs = require('./rpcs');
-const crypto = require('crypto');
-const secp256k1 = require('secp256k1');
-
-const app = express();
-const api = express.Router();
-
-app.use(function(err, req, res, next) {
-    if(!err || err.status === 404) return next(); //  TODO: Apparently is required, check if it will be at the end of the implementation
-    console.error(err.stack);
-    console.error(err);
-    res.status(500).send(err);
-});
 
 exports.createContexts = async function createContexts(args) {
   console.log("Esplix Server is starting...");
@@ -26,6 +12,7 @@ exports.createContexts = async function createContexts(args) {
     const contextsDir = dataDirectory + "/contexts";
     const contexts = [];
     for (const name of await fs.readdir(contextsDir)) {
+        console.log("Loading context", name);
         const config = JSON.parse(await fs.readFile(
             path.join(contextsDir, name)
         ));
