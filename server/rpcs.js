@@ -3,7 +3,6 @@
 function RPCError(code, message) {
     this.code = code;
     this.message = message;
-
 }
 
 
@@ -66,6 +65,29 @@ function getFieldInfo(context, args) {
     }
 }
 
+function getLastUpdateTime(context, args) {
+    if (args.length !== 1) throw new RPCError(-32602, "getFieldInfo requires 1 parameter");
+    const chainID = args[0];
+    try {
+        const instance = context.contractInstanceManager.getInstanceByChainID(chainID);
+        if (!instance) throw new RPCError(1, "Contract instance not found");
+        return Promise.resolve(instance.getLastUpdateTime());
+    } catch (e) {
+        return Promise.reject(e);
+    }
+}
+
+async function checkAction(context, args) {
+    if (args.length !== 3) throw new RPCError(-32602, "performAction requires 3 parameters");
+    const chainID = args[0];
+    const actionName = args[1];
+    const actionArgs = args[2];
+    const instance = await context.contractInstanceManager.getInstanceByChainID(chainID);
+    if (!instance) throw new RPCError(1, "Contract instance not found");
+    const res = instance.checkAction(actionName, actionArgs);
+    return res.toString();
+}
+
 async function performAction(context, args) {
     if (args.length !== 3) throw new RPCError(-32602, "performAction requires 3 parameters");
     const chainID = args[0];
@@ -101,5 +123,7 @@ module.exports = {
     getFieldInfo,
     getApplicableActions,
     createContractInstance,
-    performAction
+    performAction,
+    checkAction,
+    getLastUpdateTime
 };
