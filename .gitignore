@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 lib.es5
 esplix-server-sdk/**
+esplix-*-sdk-*.tgz
+.DS_Store
