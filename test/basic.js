@@ -53,6 +53,9 @@ describe("Context", function() {
         const contractInstance = await context.contractInstanceManager.createContractInstance(
             contractDefinition, { SELLER: context.principalIdentity.getPublicKey() }
         );
+        expect(contractInstance.checkAction("OFFER", { "PROPERTY-ID": "Frobla" })).to.equal("ok");
+        expect(contractInstance.checkAction("OFIR", { "PROPERTY-ID": "Frobla" })).to.be.an("error");
+        expect(contractInstance.checkAction("OFFER", { "PROPERTY-ID": 123 })).to.be.an("error");
         await contractInstance.performAction("OFFER", { "PROPERTY-ID": "Frobla" });
         await contractInstance.performAction("INVITE-BROKER",
             { "BROKER-PK": context2.principalIdentity.getPublicKey().toString('hex') });
@@ -62,7 +65,12 @@ describe("Context", function() {
 
         const context2_contractInstances = await context2.contractInstanceManager.getContractInstances();
 
-        expect(context2_contractInstances.length).to.equal(1)
+        expect(context2_contractInstances.length).to.equal(1);
+        expect(contractInstance.getMessageChain().length).to.equal(3);
+        expect(contractInstance.hasSyncErrors()).to.equal(false);
+        expect(contractInstance.getLastUpdateTime()).to.be.above(0);
+
+
     })
 
 
