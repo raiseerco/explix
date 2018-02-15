@@ -12,6 +12,8 @@ function request(name, args) {
             client.request(name, args, (error, response) => {
                 // console.log(response);
                 if (error) reject(error);
+                else if ('error' in response)
+                    reject(Error(response.error.message || "RPC error"));
                 else resolve(response.result);
             });
         } catch (e) {
@@ -20,9 +22,9 @@ function request(name, args) {
     });
 }
 
-async function createContractInstance() {
+function createContractInstance() {
   return request("createContractInstance",
-      ["a7d3410a253e8754f8d9676e74c21af82ccd4e7866441417007d721638b4533c", {
+      ["d409381eaffef914af68948a923d27fbd8ee263fac24aba47f988eb8ceb110df", {
           SELLER: "0000"
       }]);
 }
