@@ -25,7 +25,7 @@
     "jayson": "^2.0.2",
     "lodash": "^4.17.5",
     "postchain-client": "git+https://killerstorm@bitbucket.org/chromawallet/postchain-client.git",
-    "ratatosk": "../ratatosk",
+    "ratatosk": "4.0.0",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
