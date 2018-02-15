@@ -23,8 +23,8 @@
     "browser-request": "^0.3.3",
     "express": "^4.14.0",
     "jayson": "^2.0.2",
-    "lodash": "",
-    "postchain-client": "0.3.1",
+    "lodash": "^4.17.5",
+    "postchain-client": "git+https://killerstorm@bitbucket.org/chromawallet/postchain-client.git",
     "ratatosk": "../ratatosk",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
