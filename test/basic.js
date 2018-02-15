@@ -1,11 +1,12 @@
-import { expect } from 'chai'
-import Context from '../lib/context'
-import { dummyConfig } from '../lib/helper'
-import { DummyMailbox} from "../lib/dummymailbox"
-import * as fs from "mz/fs";
+const expect = require('chai').expect;
+const esplix = require('../lib.es5');
+const Context = esplix.EsplixContext;
+const dummyConfig = esplix.dummyConfig;
+const DummyMailbox = esplix.DummyMailbox;
+const fs = require('mz/fs');
 
 async function dummyContext(configParams) {
-    const contractData = await fs.readFile("test/futuristic.r2o");
+    const contractData = await fs.readFile("test/futuristic.r4o");
     const context = new Context(dummyConfig(configParams));
     await context.initialize();
     const contractDefinition = context.contractDefinitionManager.registerDefinition(contractData);
@@ -28,7 +29,7 @@ describe("Context", function() {
     it("create instance", async function() {
         const { context, contractDefinition } = await dummyContext();
         await context.contractInstanceManager.createContractInstance(
-            contractDefinition, { SELLER: Buffer.from("0000", "hex") }
+            contractDefinition, { SELLER: "0000" }
         );
     });
 

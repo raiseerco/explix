@@ -8,8 +8,7 @@
     "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
     "compile:watch": "mkdir -p lib.es5 && babel lib -d lib.es5 -w",
     "test": "npm run clean && npm run compile && npm run test:regtest",
-    "test:regtest": "find test/ -type f -name \"*.js\" | xargs mocha --compilers js:babel-core/register --reporter spec",
-    "babel-node": "babel-node --presets='latest'",
+    "test:regtest": "mocha $NODE_DEBUG_OPTION --reporter spec",
     "build-browser-sdk": "npm run compile && webpack --config webpack-browser.config.js && npm pack ./esplix-browser-sdk",
     "build-node-sdk": "npm run compile && webpack --config webpack-node.config.js && npm pack ./esplix-node-sdk",
     "build-server-sdk": "npm run compile && webpack --config webpack-server.config.js",
@@ -25,15 +24,15 @@
     "express": "^4.14.0",
     "jayson": "^2.0.2",
     "lodash": "",
-    "postchain-client": "git+ssh://git@bitbucket.org/chromawallet/postchain-client.git#v0.1",
-    "ratatosk2": "../ratatosk2",
+    "postchain-client": "0.3.1",
+    "ratatosk": "../ratatosk",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
   "license": "UNLICENSED",
   "bundledDependencies": [
     "postchain-client",
-    "ratatosk2"
+    "ratatosk"
   ],
   "devDependencies": {
     "babel-cli": "^6.18.0",
