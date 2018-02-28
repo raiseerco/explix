@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-2018 ChromaWay AB. Licensed under the Apache License v. 2.0, see LICENSE 
+ */
+
 const ArgumentParser = require('argparse').ArgumentParser;
 const crypto = require('crypto');
 const secp256k1 = require('secp256k1');

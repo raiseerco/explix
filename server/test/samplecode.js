@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-2018 ChromaWay AB. Licensed under the Apache License v. 2.0, see LICENSE 
+ */
+
 const jayson = require("jayson");
 const client =  jayson.client.http("http://localhost:5535/alice/jsonrpc");
 

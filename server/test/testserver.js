@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-2018 ChromaWay AB. Licensed under the Apache License v. 2.0, see LICENSE 
+ */
+
 const server = require('../backend');
 const jayson = require("jayson");
 const expect = require("chai").expect;

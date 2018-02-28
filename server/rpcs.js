@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2016-2018 ChromaWay AB. Licensed under the Apache License v. 2.0, see LICENSE
+ */
+
 // RPC functions should take two parameters: context and args, and return a promise (async fn works too)
 
 function RPCError(code, message) {
