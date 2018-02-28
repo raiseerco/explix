@@ -29,7 +29,7 @@
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
-  "license": "UNLICENSED",
+  "license": "Apache-2.0",
   "bundledDependencies": [
     "postchain-client",
     "ratatosk"
