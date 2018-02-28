@@ -1,5 +1,3 @@
-// Note: test does not automatically launch the server, so you should
-// launch Esplix Server with testdata
 const server = require('../backend');
 const jayson = require("jayson");
 const expect = require("chai").expect;

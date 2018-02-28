@@ -9,21 +9,6 @@ End users won't be able to install this library directly because it is contained
 
 For this reasons, we offer esplix-sdk package which is built from this repository using webpack.
 
-## Install 
-
-For technical reasons(see below), Ratatosk engine needs to be installed separately. A simple way to do it is 
-to run `install-ratatosk.sh` script. The whole sequence:
-
-    git clone git@bitbucket.org:chromawallet/esplix.git
-    cd esplix
-    bash install-ratatosk.sh
-    npm install
-    npm run compile
-    npm run test
-
-`npm run compile` is needed after each modification.
-
-
 ## Building SDK
 
 Running the following command:

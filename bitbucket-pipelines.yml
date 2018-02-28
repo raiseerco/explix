@@ -3,7 +3,6 @@ pipelines:
   default:
     - step:
         script:
-          - bash install-ratatosk.sh
           - npm install
           - npm run test
           - npm run test-server
