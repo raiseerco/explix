@@ -1,6 +1,6 @@
 {
   "name": "esplix",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
   "repository": "bitbucket:chromawallet/esplix",
@@ -31,10 +31,6 @@
     "transform-runtime": "0.0.0"
   },
   "license": "Apache-2.0",
-  "bundledDependencies": [
-    "postchain-client",
-    "ratatosk"
-  ],
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-eslint": "^4.1.3",
