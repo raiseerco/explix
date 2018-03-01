@@ -3,6 +3,7 @@
   "version": "4.0.0",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
+  "repository": "bitbucket:chromawallet/esplix",
   "scripts": {
     "clean": "rm -rf lib.es5",
     "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
@@ -24,8 +25,8 @@
     "express": "^4.14.0",
     "jayson": "^2.0.2",
     "lodash": "^4.17.5",
-    "postchain-client": "git+https://killerstorm@bitbucket.org/chromawallet/postchain-client.git",
-    "ratatosk": "4.0.0",
+    "postchain-client": "0.4.0",
+    "ratatosk": "^4.1.0",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
