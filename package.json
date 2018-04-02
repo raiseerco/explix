@@ -1,12 +1,13 @@
 {
   "name": "esplix",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
   "repository": "bitbucket:chromawallet/esplix",
   "scripts": {
     "clean": "rm -rf lib.es5",
     "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
+    "prepare": "npm run compile",
     "compile:watch": "mkdir -p lib.es5 && babel lib -d lib.es5 -w",
     "test": "npm run clean && npm run compile && npm run test:regtest",
     "test:regtest": "mocha $NODE_DEBUG_OPTION --reporter spec",
@@ -26,7 +27,7 @@
     "jayson": "^2.0.2",
     "lodash": "^4.17.5",
     "postchain-client": "0.4.0",
-    "ratatosk": "^4.1.0",
+    "ratatosk": "^4.1.1",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
@@ -47,5 +48,6 @@
   },
   "browser": {
     "request": "browser-request"
-  }
+  },
+  "types": "./types/index.d.ts"
 }
