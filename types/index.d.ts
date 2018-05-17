@@ -2,34 +2,43 @@
  * Copyright (c) 2016-2018 ChromaWay AB. Licensed under the Apache License v. 2.0, see LICENSE
  */
 
-import {ParameterInfo} from "ratatosk/dist/contractdefinition";
-import {ProcessedMessage} from "ratatosk/dist/contractinstance";
+import { ParameterInfo, FieldInfo, ActionInfo, ActionGuard, ActionUpdate,
+    ContractDefinition as R4ContractDefinition } from "ratatosk/dist/contractdefinition";
+import { ProcessedMessage } from "ratatosk/dist/contractinstance";
+import { ActionMatch, LogicalMessage } from "ratatosk/dist/types";
+import { RType} from "ratatosk/dist/objects";
+
+export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, ActionUpdate,
+    R4ContractDefinition, ActionMatch, RType, LogicalMessage
+}
 
 export interface PrincipalIdentity {
     isSetUp(): boolean;
 
     getID(): string;
 
-    importIdentity (encodedKeyPair: any): Promise<void>;
+    importIdentity(encodedKeyPair: any): Promise<void>;
 
-    generateIdentity (entropy?: any): Promise<void>;
+    generateIdentity(entropy?: any): Promise<void>;
 
     getRawKeyPair(): any;
 
     getKeyPair(): any;
 
-    getPublicKey (): any;
+    getPublicKey(): any;
 
-    getPrivateKey (): any;
+    getPrivateKey(): any;
 }
 
-export interface ContractDefinition {
 
+export interface ContractDefinition {
+    readonly contractHash: string;
+    readonly r4ContractDefinition: R4ContractDefinition;
 }
 
 export interface ContractDefinitionManager {
+    getAllDefinitions(): ContractDefinition[];
     registerDefinition(defdata: any): any;
-
     registerDefinitionFromURL(url: string): Promise<ContractDefinition>;
 }
 
@@ -40,9 +49,9 @@ export interface ContractInstanceManager {
 
     getInstanceByChainID(id: string): ContractInstance | undefined;
 
-    joinContractInstance (chainID: string, metadata: any): Promise<ContractInstance>;
+    joinContractInstance(chainID: string, metadata: any): Promise<ContractInstance>;
 
-    createContractInstance (contractDefinition: ContractDefinition, parameters: Parameters): Promise<ContractInstance>;
+    createContractInstance(contractDefinition: ContractDefinition, parameters: Parameters): Promise<ContractInstance>;
 }
 
 export class EsplixContext {
@@ -62,8 +71,8 @@ export function dummyConfig(a?: any): any;
 
 export function postchainConfig(a: any): any;
 
-export interface ParameterInfos {
-    [name: string]: ParameterInfo;
+export interface FieldInfos {
+    [name: string]: FieldInfo;
 }
 
 export interface Parameters {
@@ -71,6 +80,11 @@ export interface Parameters {
 }
 
 export interface ContractInstance {
-    performAction (action: string, params: Parameters): Promise<ProcessedMessage | undefined>
+    getChainID(): string;
+    getFields(): Parameters;
+    getActionInfo(name: string): ActionInfo;
+    getFieldInfo(): FieldInfos;
+    getMessageChain(): ProcessedMessage[];
+    getApplicableActions(pubkeys?: any): ActionMatch[];
+    performAction(action: string, params: Parameters): Promise<ProcessedMessage | undefined>
 }
-
