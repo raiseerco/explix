@@ -27,7 +27,7 @@
     "jayson": "^2.0.2",
     "lodash": "^4.17.5",
     "postchain-client": "0.4.0",
-    "ratatosk": "^4.1.1",
+    "ratatosk": "^4.2.0",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },

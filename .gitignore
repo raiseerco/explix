@@ -4,3 +4,6 @@ lib.es5
 esplix-server-sdk/**
 esplix-*-sdk-*.tgz
 .DS_Store
+.idea/*
+*.iml
+esplix-node-sdk/*

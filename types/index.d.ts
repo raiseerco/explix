@@ -5,8 +5,8 @@
 import { ParameterInfo, FieldInfo, ActionInfo, ActionGuard, ActionUpdate,
     ContractDefinition as R4ContractDefinition } from "ratatosk/dist/contractdefinition";
 import { ProcessedMessage } from "ratatosk/dist/contractinstance";
-import { ActionMatch, LogicalMessage } from "ratatosk/dist/types";
-import { RType} from "ratatosk/dist/objects";
+import {ActionMatch, LogicalMessage, PrivKey, PubKey } from "ratatosk/dist/types";
+import { RType } from "ratatosk/dist/objects";
 
 export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, ActionUpdate,
     R4ContractDefinition, ActionMatch, RType, LogicalMessage
@@ -14,20 +14,22 @@ export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, Ac
 
 export interface PrincipalIdentity {
     isSetUp(): boolean;
-
     getID(): string;
 
     importIdentity(encodedKeyPair: any): Promise<void>;
+    importIdentityFromPrivateKey(privKey: PrivKey): void;
+    generateIdentity(entropy?: Buffer): Promise<void>;
 
-    generateIdentity(entropy?: any): Promise<void>;
+    setAttribute(key: string, value: any): Promise<void>;
+    setCertificate(certificate: any): Promise<void>;
 
     getRawKeyPair(): any;
-
     getKeyPair(): any;
-
     getPublicKey(): any;
-
     getPrivateKey(): any;
+
+    getCertificate(): any;
+    getAttribute(key: string): any;
 }
 
 
