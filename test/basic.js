@@ -54,7 +54,7 @@ describe("Context", function() {
             mailbox: new DummyMailbox(context._mailbox.manager)
         })).context;
         await context.principalIdentity.generateIdentity();
-        await context.principalIdentity.generatePubKey(context.principalIdentity.getPrivateKey());
+        await context.principalIdentity.importIdentityFromPrivateKey(context.principalIdentity.getRawKeyPair().privKey);
         await context2.principalIdentity.generateIdentity();
         const contractInstance = await context.contractInstanceManager.createContractInstance(
             contractDefinition, { SELLER: context.principalIdentity.getPublicKey() }
