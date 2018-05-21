@@ -1,9 +1,15 @@
 {
   "name": "esplix",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
   "repository": "bitbucket:chromawallet/esplix",
+  "files": [
+    "lib.es5/*",
+    "lib/*",
+    "types/*",
+    "server/*"
+  ],
   "scripts": {
     "clean": "rm -rf lib.es5",
     "compile": "mkdir -p lib.es5 && babel lib -d lib.es5",
