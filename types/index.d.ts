@@ -5,11 +5,11 @@
 import { ParameterInfo, FieldInfo, ActionInfo, ActionGuard, ActionUpdate,
     ContractDefinition as R4ContractDefinition } from "ratatosk/dist/contractdefinition";
 import { ProcessedMessage } from "ratatosk/dist/contractinstance";
-import {ActionMatch, LogicalMessage, PrivKey, PubKey } from "ratatosk/dist/types";
+import {ActionMatch, LogicalMessage, PrivKey, PubKey, CryptoSystem } from "ratatosk/dist/types";
 import { RType } from "ratatosk/dist/objects";
 
 export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, ActionUpdate,
-    R4ContractDefinition, ActionMatch, RType, LogicalMessage
+    R4ContractDefinition, ActionMatch, RType, LogicalMessage, CryptoSystem
 }
 
 export interface PrincipalIdentity {
@@ -56,22 +56,26 @@ export interface ContractInstanceManager {
     createContractInstance(contractDefinition: ContractDefinition, parameters: Parameters): Promise<ContractInstance>;
 }
 
+export interface CertificateStore {
+    getCertificates(id: string):Promise<any[]>;
+}
+
 export class EsplixContext {
     principalIdentity: PrincipalIdentity;
     contractDefinitionManager: ContractDefinitionManager;
     contractInstanceManager: ContractInstanceManager;
+    certificateStore: CertificateStore;
 
     constructor(params: any);
-
     initialize(): Promise<void>;
-
     update(): Promise<void>;
+    getCryptoSystem(): CryptoSystem
 }
 
 
 export function dummyConfig(a?: any): any;
 
-export function postchainConfig(a: any): any;
+export function postchainConfig(a: any, b: any, c: any): any;
 
 export interface FieldInfos {
     [name: string]: FieldInfo;
