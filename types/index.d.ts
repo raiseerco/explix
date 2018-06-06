@@ -91,13 +91,14 @@ export interface MultiSigState {
     initiated: boolean;
     coordinator: string | null;
     submitted: boolean;
-    reset();
+    reset():void;
     isActive(): boolean;
 }
 
 
 export interface ContractInstance {
     multiSigState: MultiSigState;
+    getActionSigners(actionName: string): string[];
     getChainID(): string;
     getFields(): Parameters;
     getActionInfo(name: string): ActionInfo;
