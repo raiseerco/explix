@@ -6,10 +6,12 @@ import { ParameterInfo, FieldInfo, ActionInfo, ActionGuard, ActionUpdate,
     ContractDefinition as R4ContractDefinition } from "ratatosk/dist/contractdefinition";
 import { ProcessedMessage } from "ratatosk/dist/contractinstance";
 import {ActionMatch, LogicalMessage, PrivKey, PubKey, CryptoSystem, MessageProposal} from "ratatosk/dist/types";
-import { RType } from "ratatosk/dist/objects";
+import { RType, PValue, PValueArray } from "ratatosk/dist/objects";
+import { makeAESCryptor} from "ratatosk/dist/cryptors";
 
 export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, ActionUpdate,
-    R4ContractDefinition, ActionMatch, RType, LogicalMessage, CryptoSystem, MessageProposal
+    R4ContractDefinition, ActionMatch, RType, LogicalMessage, CryptoSystem, MessageProposal,
+    PValue, PValueArray, makeAESCryptor
 }
 
 export interface PrincipalIdentity {
@@ -98,6 +100,7 @@ export interface MultiSigState {
 
 export interface ContractInstance {
     multiSigState: MultiSigState;
+    contractDefintion: ContractDefinition;
     getActionSigners(actionName: string): string[];
     getChainID(): string;
     getFields(): Parameters;
