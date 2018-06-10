@@ -104,6 +104,7 @@ export interface ContractInstance {
     contractDefinition: ContractDefinition;
     getActionSigners(actionName: string): string[];
     getChainID(): string;
+    getContext(): EsplixContext;
     getFields(): Parameters;
     getActionInfo(name: string): ActionInfo;
     getFieldInfo(): FieldInfos;
