@@ -1,6 +1,6 @@
 {
   "name": "esplix",
-  "version": "4.1.5",
+  "version": "4.2.0",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
   "repository": "bitbucket:chromawallet/esplix",
