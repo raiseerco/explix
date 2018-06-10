@@ -67,6 +67,7 @@ export class EsplixContext {
     contractDefinitionManager: ContractDefinitionManager;
     contractInstanceManager: ContractInstanceManager;
     certificateStore: CertificateStore;
+    postchainClient: any;
 
     constructor(params: any);
     initialize(): Promise<void>;
@@ -100,7 +101,7 @@ export interface MultiSigState {
 
 export interface ContractInstance {
     multiSigState: MultiSigState;
-    contractDefintion: ContractDefinition;
+    contractDefinition: ContractDefinition;
     getActionSigners(actionName: string): string[];
     getChainID(): string;
     getFields(): Parameters;
