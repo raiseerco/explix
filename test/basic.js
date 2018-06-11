@@ -43,6 +43,8 @@ describe("Context", function() {
         const contractInstance = await context.contractInstanceManager.createContractInstance(
             contractDefinition, { SELLER: context.principalIdentity.getPublicKey() }
         );
+        contractInstance.getApplicableActions();
+        contractInstance.getAllApplicableActions();
         await contractInstance.performAction("OFFER", { "PROPERTY-ID": "Frobla" })
     });
 
