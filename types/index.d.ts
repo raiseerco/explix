@@ -110,5 +110,6 @@ export interface ContractInstance {
     getFieldInfo(): FieldInfos;
     getMessageChain(): ProcessedMessage[];
     getApplicableActions(pubkeys?: any): ActionMatch[];
+    getAllApplicableActions(): ActionMatch[];
     performAction(action: string, params: Parameters): Promise<ProcessedMessage | undefined>
 }
