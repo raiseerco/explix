@@ -68,6 +68,7 @@ export class EsplixContext {
     contractInstanceManager: ContractInstanceManager;
     certificateStore: CertificateStore;
     postchainClient: any;
+    consensusEngine: any;
 
     constructor(params: any);
     initialize(): Promise<void>;
