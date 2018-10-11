@@ -3,6 +3,7 @@
  */
 
 import { ParameterInfo, FieldInfo, ActionInfo, ActionGuard, ActionUpdate,
+    UpdateEntry,
     ContractDefinition as R4ContractDefinition } from "ratatosk/dist/contractdefinition";
 import { ProcessedMessage } from "ratatosk/dist/contractinstance";
 import {ActionMatch, LogicalMessage, PrivKey, PubKey, CryptoSystem, MessageProposal} from "ratatosk/dist/types";
@@ -11,7 +12,7 @@ import { makeAESCryptor} from "ratatosk/dist/cryptors";
 
 export { ParameterInfo, FieldInfo, ProcessedMessage, ActionGuard, ActionInfo, ActionUpdate,
     R4ContractDefinition, ActionMatch, RType, LogicalMessage, CryptoSystem, MessageProposal,
-    PValue, PValueArray, makeAESCryptor
+    PValue, PValueArray, makeAESCryptor, UpdateEntry
 }
 
 export interface PrincipalIdentity {
