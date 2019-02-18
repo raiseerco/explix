@@ -1,6 +1,6 @@
 {
   "name": "esplix",
-  "version": "4.2.6",
+  "version": "4.2.7",
   "description": "Esplix smart contract layer",
   "main": "lib.es5/index.js",
   "repository": "bitbucket:chromawallet/esplix",
@@ -33,7 +33,7 @@
     "jayson": "^2.0.2",
     "lodash": "^4.17.5",
     "postchain-client": "0.4.0",
-    "ratatosk": "^4.6.5",
+    "ratatosk": "4.6.6",
     "shebang-loader": "0.0.1",
     "transform-runtime": "0.0.0"
   },
